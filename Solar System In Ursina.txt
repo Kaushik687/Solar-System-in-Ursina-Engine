@@ -1,0 +1,127 @@
+from ursina import *
+
+application.development_mode = False
+
+app = Ursina()
+
+def update():
+    sun.rotation_y += 150 * time.dt
+    mercury.rotation_y += 20 * time.dt
+    venus.rotation_y -= 10 * time.dt
+    earth.rotation_y += 50 * time.dt
+    mars.rotation_y += 35 * time.dt
+    jupiter.rotation_y += 100 * time.dt
+    saturn.rotation_y += 90 * time.dt
+    uranus.rotation_y += 65 * time.dt
+    neptune.rotation_y += 75 * time.dt
+    mercury_orbit.rotation_y += 100 * time.dt
+    venus_orbit.rotation_y += 90 * time.dt
+    earth_orbit.rotation_y += 75 * time.dt
+    mars_orbit.rotation_y += 65 * time.dt
+    jupiter_orbit.rotation_y += 50 * time.dt
+    saturn_orbit.rotation_y += 35 * time.dt
+    uranus_orbit.rotation_y += 20 * time.dt
+    neptune_orbit.rotation_y += 10 * time.dt
+
+window.fullscreen = True
+window.borderless = True
+window.color = color.rgb(10,10,30)
+
+sun = Entity(model='sphere',
+             collider='sphere',
+             color=color.yellow,
+             texture='noise',
+             scale=(15,15,15),
+             position=(0,0,0),
+             )
+mercury_orbit = Entity(parent=sun,)
+mercury = Entity(parent=mercury_orbit,
+           model='sphere',
+           collider='sphere',
+           color=color.brown,
+           texture='sky_sunset',
+           world_scale=(0.75,0.75,0.75),
+           world_position=(10,0,10), #0+10
+           )
+venus_orbit = Entity(parent=sun,)
+venus = Entity(parent=venus_orbit,
+               model='sphere',
+               collider='sphere',
+               color=color.yellow,
+               texture='sky_sunset',
+               world_scale=(1.75,1.75,1.75),
+               world_position=(25,0,25), #10+15
+               )
+earth_orbit = Entity(parent=sun,)
+earth = Entity(parent=earth_orbit,
+               model='sphere',
+               collider='sphere',
+               color=color.green,
+               texture='sky_sunset',
+               world_scale=(2,2,2),
+               world_position=(45,0,45), #25+20
+               )
+moon = Entity(parent=earth,
+              model='sphere',
+              collider='sphere',
+              color=color.white,
+              texture='cobblestone',
+              world_scale=(0.5,0.5,0.5),
+              world_position=(50,0,50), #45+5
+              )
+mars_orbit = Entity(parent=sun,)
+mars = Entity(parent=mars_orbit,
+              model='sphere',
+              collider='sphere',
+              color=color.red,
+              texture='sky_sunset',
+              world_scale=(1.5,1.5,1.5),
+              world_position=(70,0,70), #45+25
+              )
+
+#70=30=100 saved for asteroid belt
+#I could not make it :(
+
+jupiter_orbit = Entity(parent=sun,)
+jupiter = Entity(parent=jupiter_orbit,
+                 model='sphere',
+                 collider='sphere',
+                 color=color.orange,
+                 texture='sky_sunset',
+                 world_scale=(10,10,10),
+                 world_position=(135,0,135), #100+35
+                 )
+saturn_orbit = Entity(parent=sun,)
+saturn = Entity(parent=saturn_orbit,
+                 model='sphere',
+                 collider='sphere',
+                 color=color.light_gray,
+                 texture='sky_sunset',
+                 world_scale=(8,8,8),
+                 world_position=(175,0,175), #135+40
+                 )
+#I could not make the rings either :(
+uranus_orbit = Entity(parent=sun,)
+uranus = Entity(parent=uranus_orbit,
+                 model='sphere',
+                 collider='sphere',
+                 color=color.cyan,
+                 texture='sky_sunset',
+                 world_scale=(4,4,4),
+                 world_position=(220,0,220), #175+45
+                 )
+neptune_orbit = Entity(parent=sun,)
+neptune = Entity(parent=neptune_orbit,
+                 model='sphere',
+                 collider='sphere',
+                 color=color.blue,
+                 texture='sky_sunset',
+                 world_scale=(3.5,3.5,3.5),
+                 world_position=(270,0,270), #220+50
+                 )
+
+sky = Sky()
+
+EditorCamera()
+
+app.run()
